@@ -105,15 +105,8 @@ function compareDate(a,b) {
   return 0;
 }
 
-function findReplies(id, replies) {
-  var _replies = replies.filter(function (x) {
-    return (x.references.indexOf(id) != -1);
-  });
-  return _replies.map(reply => parseAnnotation(reply)).reverse();
-}
-
 function formatAnnotationAndReplies(annotation, replies) {
-  var _replies = findReplies(annotation.id, replies);
+  var _replies = findRepliesForId(annotation.id, replies);
   var all = [annotation].concat(_replies);
   var output = '';
   all.forEach ( anno => {
