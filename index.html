@@ -87,10 +87,10 @@ function compareLocation(a,b) {
   var aStart = parseSelectors(a.target).TextPosition.start;
   var bStart = parseSelectors(b.target).TextPosition.start;
   if (aStart < bStart) {
-    return -1;
+    return 1;
   }
   if (aStart > bStart) {
-    return 1;
+    return -1;
   }
   return 0;
 }
