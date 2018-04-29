@@ -142,6 +142,10 @@ function processSearchResults(annos, replies) {
   var sortFn = sortKey === 'location' ? compareLocation : compareDate;
 
   var annotations = annos.filter(x => ! x.isPagenote);
+  
+  // exclude annotations created programmatically with no TextPosition, 
+  annotations = annotations.filter(x => parseSelectors(x.target).TextPosition);
+  
   annotations.sort(sortFn).reverse();
   var annotationOutput = '';
   annotations.forEach(annotation => {
@@ -179,17 +183,20 @@ function setUrl() {
 function getUrl() {
   return getFromUrlParamOrLocalStorage('h_url', '')
 }  
-createNamedInputForm(getById('urlContainer'), 
-                      'URL', 
-                      'url', 
-                      getUrl(),
-                      'setUrl',
-                      '', 
-                      'URL from which to export annotations'
-                    );
+
+let args = {
+    element: getById('urlContainer'),
+    name: 'URL',
+    id: 'url',
+    value: getUrl(),
+    onChange: 'setUrl',
+    type: '',
+    msg: 'URL from which to export annotations',
+    };
+createNamedInputForm(args);
                     
-  if (gup('h_url') !== '') {
-    document.querySelector(`.urlForm input`).value = gup('h_url');
+if (gup('h_url') !== '') {
+  document.querySelector(`.urlForm input`).value = gup('h_url');
 }
 </script>
 
