@@ -13,9 +13,8 @@ body {
 }
 </style>
 <script src="https://jonudell.info/hlib/showdown.js"></script>
-<script src="https://jonudell.info/hlib/hlib.js"></script>
+<script src="https://jonudell.info/hlib/hlib.bundle.js"></script>
 <script src="./index.js"></script>
-<script src="./tinytest.js"></script>
 </head>
 
 <body>
@@ -44,13 +43,13 @@ body {
 
 <script>
                     
-if (gup('h_url') !== '') {
-  document.querySelector(`.urlForm input`).value = gup('h_url');
+if (hlib.gup('h_url') !== '') {
+  document.querySelector(`.urlForm input`).value = hlib.gup('h_url');
 }
 
 window.onload = function() {
   let args = {
-    element: getById('urlContainer'),
+    element: hlib.getById('urlContainer'),
     name: 'URL',
     id: 'url',
     value: getUrl(),
@@ -58,7 +57,7 @@ window.onload = function() {
     type: '',
     msg: 'URL from which to export annotations',
     };
-createNamedInputForm(args);
+hlib.createNamedInputForm(args);
 };
 
 document.body.addEventListener('search', function(e) {
